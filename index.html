@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte Electoral - Alcaldía Distrito Central</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">
+            <span class="theme-icon">🌙</span>
+        </button>
+
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>REPORTE ELECTORAL</h1>
+                <h2>Alcaldía del Distrito Central</h2>
+                <p class="subtitle">Análisis de Actas en Escrutinio e Impugnación</p>
+                <div class="header-legend">
+                    <span class="legend-item"><span class="dot libre"></span> LIBRE</span>
+                    <span class="legend-item"><span class="dot pnh"></span> PNH</span>
+                    <span class="legend-item"><span class="dot plh"></span> PLH</span>
+                    <span class="legend-item"><span class="dot dc"></span> DC</span>
+                    <span class="legend-item"><span class="dot pinu"></span> PINU</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Resumen Principal -->
+        <section class="summary-section">
+            <div class="summary-cards">
+                <div class="card card-total">
+                    <h3>TOTAL 2,441 ACTAS</h3>
+                    <div class="card-content">
+                        <div class="partido libre">
+                            <span class="partido-name">LIBRE</span>
+                            <span class="partido-votes">200,242</span>
+                        </div>
+                        <div class="partido pnh">
+                            <span class="partido-name">PNH</span>
+                            <span class="partido-votes">199,852</span>
+                        </div>
+                        <div class="diferencia positiva">
+                            <span>DIFERENCIA</span>
+                            <span class="diff-value">+390</span>
+                        </div>
+                    </div>
+                    <div class="winner">
+                        <span class="winner-label">GANA LIBRE</span>
+                    </div>
+                </div>
+
+                <div class="card card-cne">
+                    <h3>PUBLICADO CNE</h3>
+                    <div class="actas-status">
+                        <div class="status-item">
+                            <span class="status-label">Actas Transmitidas</span>
+                            <span class="status-value">2,436 de 2,441</span>
+                            <span class="status-pct">99.80%</span>
+                        </div>
+                        <div class="status-breakdown">
+                            <div class="status-correctas">
+                                <span class="status-dot correctas"></span>
+                                <span>Correctas: <strong>2,006</strong></span>
+                            </div>
+                            <div class="status-inconsistencias">
+                                <span class="status-dot inconsistencias"></span>
+                                <span>Inconsistencias: <strong>430</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-stats-full">
+                        <div class="stat-row pnh"><span>PNH</span><span>164,465 <small>(38.01%)</small></span></div>
+                        <div class="stat-row libre"><span>LIBRE</span><span>163,577 <small>(37.81%)</small></span></div>
+                        <div class="stat-row plh"><span>PLH</span><span>84,231 <small>(19.47%)</small></span></div>
+                        <div class="stat-row dc"><span>DC</span><span>11,815 <small>(2.73%)</small></span></div>
+                        <div class="stat-row pinu"><span>PINU</span><span>8,636 <small>(2.00%)</small></span></div>
+                        <div class="stat-row especiales"><span>BLANCOS</span><span>6,546</span></div>
+                        <div class="stat-row especiales"><span>NULOS</span><span>2,203</span></div>
+                        <div class="stat-row diff"><span>DIFERENCIA L-P</span><span class="negativa">-888</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Actas en Escrutinio -->
+        <section class="escrutinio-section">
+            <h2 class="section-title">ACTAS EN ESCRUTINIO E IMPUGNACIÓN</h2>
+            
+            <div class="escrutinio-grid">
+                <!-- 430 Actas -->
+                <div class="escrutinio-card">
+                    <div class="card-header">
+                        <h3>430 ACTAS</h3>
+                        <span class="badge">Escrutinio</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart430"></canvas>
+                    </div>
+                    <div class="card-stats-full">
+                        <div class="stat-row libre"><span>LIBRE</span><span>36,249</span></div>
+                        <div class="stat-row pnh"><span>PNH</span><span>35,004</span></div>
+                        <div class="stat-row plh"><span>PLH</span><span>18,794</span></div>
+                        <div class="stat-row dc"><span>DC</span><span>2,543</span></div>
+                        <div class="stat-row pinu"><span>PINU</span><span>1,846</span></div>
+                        <div class="stat-row diff"><span>DIFERENCIA L-P</span><span class="positiva">+1,245</span></div>
+                    </div>
+                </div>
+
+                <!-- 5 Actas -->
+                <div class="escrutinio-card">
+                    <div class="card-header">
+                        <h3>5 ACTAS</h3>
+                        <span class="badge badge-alt">Impugnación</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart5"></canvas>
+                    </div>
+                    <div class="card-stats-full">
+                        <div class="stat-row libre"><span>LIBRE</span><span>416</span></div>
+                        <div class="stat-row pnh"><span>PNH</span><span>383</span></div>
+                        <div class="stat-row plh"><span>PLH</span><span>202</span></div>
+                        <div class="stat-row dc"><span>DC</span><span>36</span></div>
+                        <div class="stat-row pinu"><span>PINU</span><span>15</span></div>
+                        <div class="stat-row diff"><span>DIFERENCIA L-P</span><span class="positiva">+33</span></div>
+                    </div>
+                </div>
+
+                <!-- 435 Total -->
+                <div class="escrutinio-card featured">
+                    <div class="card-header">
+                        <h3>435 ACTAS TOTAL</h3>
+                        <span class="badge badge-featured">Consolidado</span>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chart435"></canvas>
+                    </div>
+                    <div class="card-stats-full">
+                        <div class="stat-row libre"><span>LIBRE</span><span>36,665</span></div>
+                        <div class="stat-row pnh"><span>PNH</span><span>35,387</span></div>
+                        <div class="stat-row plh"><span>PLH</span><span>18,996</span></div>
+                        <div class="stat-row dc"><span>DC</span><span>2,579</span></div>
+                        <div class="stat-row pinu"><span>PINU</span><span>1,861</span></div>
+                        <div class="stat-row diff"><span>DIFERENCIA L-P</span><span class="positiva">+1,278</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparativa General -->
+        <section class="comparison-section">
+            <h2 class="section-title">COMPARATIVA GENERAL</h2>
+            <div class="comparison-chart-container">
+                <canvas id="chartComparison"></canvas>
+            </div>
+        </section>
+
+        <!-- Resultado Final -->
+        <section class="result-section">
+            <div class="result-box">
+                <h2>RESULTADO FINAL PROYECTADO</h2>
+                <div class="result-grid">
+                    <div class="result-item">
+                        <span class="result-label">CNE Actual</span>
+                        <div class="result-data">
+                            <span class="libre">163,577</span>
+                            <span class="vs">vs</span>
+                            <span class="pnh">164,465</span>
+                        </div>
+                        <span class="result-diff negativa">-888</span>
+                    </div>
+                    <div class="result-plus">+</div>
+                    <div class="result-item">
+                        <span class="result-label">435 Actas</span>
+                        <div class="result-data">
+                            <span class="libre">36,665</span>
+                            <span class="vs">vs</span>
+                            <span class="pnh">35,387</span>
+                        </div>
+                        <span class="result-diff positiva">+1,278</span>
+                    </div>
+                    <div class="result-equals">=</div>
+                    <div class="result-item final">
+                        <span class="result-label">TOTAL FINAL</span>
+                        <div class="result-data">
+                            <span class="libre">200,242</span>
+                            <span class="vs">vs</span>
+                            <span class="pnh">199,852</span>
+                        </div>
+                        <span class="result-diff positiva big">+390</span>
+                    </div>
+                </div>
+                <div class="final-winner">
+                    <span>GANA</span>
+                    <span class="winner-badge">ALDANA</span>
+                    <span>CON +390 VOTOS</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Análisis basado en datos oficiales de actas electorales</p>
+            <p>Alcaldía del Distrito Central - Honduras 2025</p>
+        </footer>
+    </div>
+
+    <script src="charts.js"></script>
+</body>
+</html>
